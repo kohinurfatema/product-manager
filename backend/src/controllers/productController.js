@@ -56,4 +56,40 @@ const createProduct = async (req, res) => {
   }
 };
 
-module.exports = { getProducts, createProduct };
+const updateProduct = async (req, res) => {
+  try {
+    const { name, price, description, image, imageType } = req.body;
+
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    if (name) product.name = name;
+    if (price !== undefined) product.price = Number(price);
+    if (description) product.description = description;
+    if (image !== undefined) product.image = image;
+    if (imageType) product.imageType = imageType;
+
+    const updated = await product.save();
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    await product.deleteOne();
+    res.json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getProducts, createProduct, updateProduct, deleteProduct };
