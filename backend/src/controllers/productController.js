@@ -36,18 +36,29 @@ const getProducts = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const { name, price, description, image, imageType } = req.body;
+    const { name, price, description, image } = req.body;
 
     if (!name || !price || !description) {
       return res.status(400).json({ message: 'Name, price and description are required' });
+    }
+
+    let imageValue = '';
+    let imageType = 'url';
+
+    if (req.file) {
+      imageValue = `/uploads/${req.file.filename}`;
+      imageType = 'upload';
+    } else if (image) {
+      imageValue = image;
+      imageType = 'url';
     }
 
     const product = await Product.create({
       name,
       price: Number(price),
       description,
-      image: image || '',
-      imageType: imageType || 'url',
+      image: imageValue,
+      imageType,
     });
 
     res.status(201).json(product);
@@ -68,8 +79,14 @@ const updateProduct = async (req, res) => {
     if (name) product.name = name;
     if (price !== undefined) product.price = Number(price);
     if (description) product.description = description;
-    if (image !== undefined) product.image = image;
-    if (imageType) product.imageType = imageType;
+
+    if (req.file) {
+      product.image = `/uploads/${req.file.filename}`;
+      product.imageType = 'upload';
+    } else if (req.body.image !== undefined) {
+      product.image = req.body.image;
+      product.imageType = 'url';
+    }
 
     const updated = await product.save();
     res.json(updated);
