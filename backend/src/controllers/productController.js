@@ -34,4 +34,26 @@ const getProducts = async (req, res) => {
   }
 };
 
-module.exports = { getProducts };
+const createProduct = async (req, res) => {
+  try {
+    const { name, price, description, image, imageType } = req.body;
+
+    if (!name || !price || !description) {
+      return res.status(400).json({ message: 'Name, price and description are required' });
+    }
+
+    const product = await Product.create({
+      name,
+      price: Number(price),
+      description,
+      image: image || '',
+      imageType: imageType || 'url',
+    });
+
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getProducts, createProduct };
