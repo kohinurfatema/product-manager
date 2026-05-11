@@ -146,8 +146,8 @@ docker-compose up --build
 
 ## Live Demo
 
-- **Frontend:** [Live Link]
-- **Backend API:** [Live Link]
+- **Frontend:** [https://product-manager-blush-nine.vercel.app](https://product-manager-blush-nine.vercel.app)
+- **Backend API:** [https://product-manager-backend-rok4.onrender.com](https://product-manager-backend-rok4.onrender.com)
 
 ## Author
 
