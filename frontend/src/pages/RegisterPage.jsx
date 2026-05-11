@@ -26,9 +26,9 @@ const RegisterPage = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+    <div className="auth-wrapper">
       {/* Left Panel */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem', color: 'white' }}>
+      <div className="auth-left">
         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🛍️</div>
         <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '0.75rem', textAlign: 'center' }}>Product Manager</h1>
         <p style={{ fontSize: '1.1rem', opacity: 0.85, textAlign: 'center', maxWidth: '300px', lineHeight: '1.6' }}>
@@ -37,7 +37,7 @@ const RegisterPage = () => {
       </div>
 
       {/* Right Panel */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', backgroundColor: 'white', borderRadius: '24px 0 0 24px' }}>
+      <div className="auth-right">
         <div style={{ width: '100%', maxWidth: '380px' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937', marginBottom: '0.5rem' }}>Create account</h2>
           <p style={{ color: '#6b7280', marginBottom: '2rem', fontSize: '0.95rem' }}>Start managing your products today</p>
