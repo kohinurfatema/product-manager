@@ -1,7 +1,11 @@
+const backendUrl = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL.replace('/api', '')
+  : 'http://localhost:5000';
+
 const ProductCard = ({ product, onEdit, onDelete }) => {
   const imageUrl = product.image
     ? product.imageType === 'upload'
-      ? `http://localhost:5000${product.image}`
+      ? `${backendUrl}${product.image}`
       : product.image
     : null;
 
